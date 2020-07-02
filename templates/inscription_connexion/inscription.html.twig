@@ -1,0 +1,46 @@
+{% include 'fragment/_navbar.html.twig' %}
+
+
+
+{#vue pour l'inscription#}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block content %}
+<body>
+<br>
+<br>
+<br>
+<br>
+<h1 class="text-center display-2 text-dark text-uppercase">inscrivez-vous</h1>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+      <center>
+        <div class="row">
+          <div class="col-md-12">     
+            {{form_start(form)}}  {# ATTENTION PAS DESPACE ENTRE ACOLADE #}
+              <div class="col-md-4"><h3 class="text-left">{{form_row(form.username, {'label':'Nom d\'utilisateur'})}}</h3></div>     
+              <div class="col-md-4"><h3 class="text-left">{{form_row(form.password, {'label':'Mot de passe'})}}</h3></div>          
+              <br>
+              <button type="submit" class="btn btn-dark"><h4>inscription</h4></button>
+            {{form_end(form)}} 
+
+           </div>
+        </div>
+      </center>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+{% endblock %}
+{% include 'fragment/_footer.html.twig' %}

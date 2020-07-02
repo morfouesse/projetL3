@@ -1,0 +1,116 @@
+{% include "fragment/_navbar.html.twig" %}
+
+  
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block content %}
+<!doctype html>
+<html>
+<body>
+        <div class= "jumbotron">
+            <div class="container">
+                <h3>Filtres:</h3>
+                <br>
+                {{ form_start(form) }}
+                   <div class="form-row">
+                        <div class="col">
+                            {{ form_row(form.heureDeDebutMin, { 'attr': {'placeholder': 'Heure de début'} }) }}
+                        </div>
+                   </div>
+                   <div class="form-row">
+                        <div class="col">
+                            {{ form_row(form.heureDeFinMax, { 'attr': {'placeholder': 'Heure de fin'} }) }}
+                        </div>
+                   </div>
+                    <div class="form-row">
+                        <div class="col">
+                           <button class= "btn btn-dark">Rechercher</button>
+                        </div>
+                   </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        {# si les offre des reservations(requeteSQL) sont vide alors on affiche toute les offres #}
+        {% if actif == 1 %}
+            <center><h2>il y a aucune proposition</h2> </center>
+            {% else %}  
+                <center>
+                <h1 class="text-center display-4 text-dark text-uppercase">Rechercher votre offre en journée</h1>
+                </center>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="container">
+                    <div class="row flex">
+                        {% if not lesOffresDeReservations %}
+                            {% for lOffre in lesOffresDeReservationsAll %} 
+                                <div class="col-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="card-title">{{ lOffre.uneReservationDunLogement.nomLogement }}</h3>
+                                        </div>
+                                        <div class="card-text">
+                                            <div class= "container">
+                                                <h5>{{ lOffre.uneReservationDunLogement.nomTypeLogement }}</h5>
+                                                <h5>{{ lOffre.uneReservationDunLogement.laVilleDunLogement.nomVille }}</h5>
+                                                <h5>{{ lOffre.uneReservationDunLogement.descriptionLogement }}</h5>
+                                                <h5>{{ lOffre.uneReservationDunLogement.prixLogement }} €</h5>
+                                                <h5>{{ lOffre.dateOffre }}</h5>
+                                                <h5>{{ lOffre.heureOffreDebut }}-{{ lOffre.heureOffreFin }}</h5>
+                                            </div>
+                                            <a href={{ path('infoLogement', {'idLogement': lOffre.uneReservationDunLogement.id, 'idOffre': lOffre.id }) }}
+                                                        class="btn btn-dark" role="button" aria-disabled="true"><h4>regarder ce logement</h4></a>
+                                        
+                                        </div>                                    
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %} 
+                        {% if actif == 3 or actif == 2 %}      
+                            {% for lOffre in lesOffresDeReservations %}  
+                            <br>
+                            <div class="col-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="card-title">{{ lOffre.nomLogement }}</h3>
+                                        </div>
+                                            <div class="card-text">
+                                                <div class= "container">
+                                                    <h5>{{ lOffre.nomTypeLogement }}</h5>
+                                                    <h5>{{ lOffre.nomVille }}</h5>
+                                                    <h5>{{ lOffre.descriptionLogement }}</h5>
+                                                    <h5>{{ lOffre.prixLogement }} €</h5>
+                                                    <h5>{{ lOffre.dateOffre }}</h5>
+                                                    <h5>{{ lOffre.heureOffreDebut }}-{{ lOffre.heureOffreFin }}</h5>
+                                                </div>
+                                                <a href={{ path('infoLogement', {'idLogement': lOffre.id, 'idOffre': lOffre.id }) }}
+                                                class="btn btn-dark" role="button" aria-disabled="true"><h4>regarder ce logement</h4></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            {% endfor %}
+                        {% endif %} 
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <a href={{ path('accueil') }} class="btn btn-dark"><h4>retour à l'accueil</h4></a>
+                </div>
+        {% endif %}  
+        <br>
+        <br>
+        <br>
+        <br>
+      
+        <br>
+        <br>
+        <br>
+        <br>
+    </body>
+</html>
+{% endblock %}
+  {% include 'fragment/_footer.html.twig' %}

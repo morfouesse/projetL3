@@ -1,0 +1,140 @@
+{% include "fragment/_navbar.html.twig" %}
+
+
+  
+
+{% block content %}
+<!doctype html>
+<html>
+<body>
+        <br>
+        <br>
+        <br>
+           {% for uneInfo in lesInfosDunLogement %}  
+        <center>
+          <h1 class="text-center display-4 text-dark text-uppercase">{{ uneInfo.uneReservationDunLogement.nomLogement }}</h1>
+        </center>
+        <br>
+        <br>
+          <div  style=" margin:auto; padding-left: 200px;">
+            <h3>{{ uneInfo.uneReservationDunLogement.laVilleDunLogement.nomVille }},
+            {{ uneInfo.uneReservationDunLogement.nomTypeLogement }},
+            {{ uneInfo.dateOffre}},
+            {{ uneInfo.heureOffreDebut }}-{{ uneInfo.heureOffreFin }},
+            {{ uneInfo.uneReservationDunLogement.prixLogement }} €
+            </h3>
+         </div>
+         {% endfor %}
+      
+       
+          {% for key, unePhotoDunLogement in lesPhotosDunLogement %}  
+            {% if unePhotoDunLogement.nomPhoto %}
+              <div class:"container" style=" padding-left: 200px;">
+                {% if key !=0 %}
+             
+                 <img  src="/images/lesPhotos/{{ unePhotoDunLogement.nomPhoto }}" alt="img-hotel"  style= "width: 42%; height:auto;">
+             
+    
+                {% else %}
+                
+                 <img class="float-left" src="/images/lesPhotos/{{ unePhotoDunLogement.nomPhoto }}" alt="img-hotel"  style= "width: 44.9%; height:auto;">
+               
+               {% endif %}
+                </div>
+            {% endif %}
+           {% endfor %}
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+     
+         
+            <div style="float: left;  padding-left: 180px;">
+                  {% for uneInfo in lesInfosDunLogement %} 
+                      <div class="col-7">
+                        <div class="card">
+                          <div class="card-body">
+                            <h2 class="card-title">{{ uneInfo.uneReservationDunLogement.nomLogement }}</h2>
+                          </div>
+                          <div class="card-text">
+                            <div class= "container">
+                              <h4>{{ uneInfo.uneReservationDunLogement.nomTypeLogement }}</h4>   
+                              <h4>{{ uneInfo.uneReservationDunLogement.laVilleDunLogement.nomVille }}</h4>  
+                              <h4>{{ uneInfo.dateOffre}}</h4>
+                              <h4>{{ uneInfo.heureOffreDebut }}-{{ uneInfo.heureOffreFin }}</h4>
+                              <h4>{{ uneInfo.uneReservationDunLogement.prixLogement }} €</h4>
+                              <h5>{{ uneInfo.uneReservationDunLogement.descriptionLogement }}</h5>
+                            </div>
+                              <div class="card-body">
+                              <h2 class="card-title">Equipements</h2>
+                            </div>
+                            {% for unEquipement in lesEquipementsDunLogement %} 
+                              <div class="card-text">
+                                <div class= "container">
+                                  <h4>{{ unEquipement.lequipement.nomEquipement }}</h4>
+                                </div>
+                              </div>
+                              {% endfor %}
+                            {% if uneInfo.reserverOffre == 0 %}
+                              <a href={{ path('reservation', {'idLogement': idLogement,'idOffre' : uneInfo.id }) }} class="btn btn-dark">
+                              <h4>&nbsp;&nbsp;Réserver cette offre&nbsp;&nbsp;&nbsp;</h4></a>
+                            {% else %}
+                              <a href="#" class="btn btn-dark disabled" role="button" aria-disabled="true"><h4>cette offre est déjà réserver</h4></a>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                  {% endfor %}
+              </div>
+            
+    
+          <div style="float: right; padding-right: 220px;">
+            {% if not lesCommentairesDunLogement %}
+              <h2>il y a aucun commentaire, vite réserver pour en faire un !</h2>
+              {% else %}
+                {% for unCommentaire in lesCommentairesDunLogement %}
+                <br>
+               <div class="container">
+                    <div class="row flex">  
+                      <div class="col-12">
+                          <div class="card">
+                            <div class="card-body">
+                              <h2 class="card-title">{{ unCommentaire.leCommentaireDunUser.username }}</h2>
+                            </div>
+                         
+                            <div class="card-text">
+                              <div class= "container">
+                                <h4>{{ unCommentaire.notationCommentaire }}/5</h4>
+                                <h4>{{ unCommentaire.titreCommentaire }}</h4>
+                                <h5>{{ unCommentaire.descriptionCommentaire }}</h5>
+                              </div>
+                            </div>
+                           
+                          </div>
+                      </div>
+              </div>
+            </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+  
+
+        <div style=" padding-top: 700px; padding-left: 196px;">
+          <a href={{ path('listeLogement') }} class="btn btn-dark"><h4>retour à la liste des offres</h4></a>
+        </div>
+        </body>
+         <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+</html>
+
+{% endblock %}
+  {% include 'fragment/_footer.html.twig' %}
+

@@ -1,0 +1,44 @@
+{% include "fragment/_navbar.html.twig" %}
+
+  
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block content %}
+<!doctype html>
+<html>
+<body>
+    <br>
+    <br>
+    <br>
+    <h1 class="text-center display-2 text-dark text-uppercase">Modifer votre commentaire </h1>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <center>
+            <div class="row">
+                <div class=" container col-md-12" >    
+                    {% for leChamps in lesCommentaires %}
+                        {{form_start(form)}}  {# ATTENTION PAS DESPACE ENTRE ACOLADE #}
+                        <div class="col-md-4"><h3 class="text-left">{{form_row(form.notationCommentaire, {'label':'note', 'value' : leChamps.notationCommentaire })}}</h3></div>
+                        <div class="col-md-4"><h3 class="text-left">{{form_row(form.titreCommentaire, {'label':'Titre', 'value' : leChamps.titreCommentaire })}}</h3></div>
+                        <div class="col-md-4"><h3 class="text-left">{{form_row(form.descriptionCommentaire, {'label':'Description', 'value' : leChamps.descriptionCommentaire })}}</h3></div>
+                    {% endfor %}
+                <br>
+                <button type="submit" class="btn btn-dark"><h4>envoyer le commentaire</h4></button>
+                {{form_end(form)}}             
+                </div>
+            </div>
+        </center>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+</html>
+{% endblock %}
+  {% include 'fragment/_footer.html.twig' %}

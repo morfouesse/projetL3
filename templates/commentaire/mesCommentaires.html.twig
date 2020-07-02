@@ -1,0 +1,90 @@
+{% include "fragment/_navbar.html.twig" %}
+
+  
+
+{% block content %}
+<!doctype html>
+<html>
+<body>
+    <br>
+    <br>
+    <br>
+    <h1 class="text-center display-4 text-dark text-uppercase">Vos commentaires </h1>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row flex">
+            {% for unCommentaire in lesCommentairesDunUser %}  
+               <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ unCommentaire.leCommentaireDuLogement.nomLogement }}</h3>
+                        </div>
+                        <div class="card-text">
+                            <div class= "container">
+                                <h3>{{ unCommentaire.notationCommentaire }}/5</h3>
+                                <h3>{{ unCommentaire.titreCommentaire }}</h3>
+                                {% if unCommentaire.descriptionCommentaire != null %}
+                                    <h5>{{ unCommentaire.descriptionCommentaire }}</h5>
+                                    {% else %}
+                                        <br>
+                                        <br>
+                                {% endif %}
+                               
+                            </div>
+                           <a  href={{ path('modifCommentaire', {'idCommentaire': unCommentaire.id }) }}
+                            class="btn btn-light" role="button" aria-disabled="true"><h3>&nbsp;modifier un commentaire&nbsp;</h3></a>
+                
+                            <a  href={{ path('suppCommentaire', {'idCommentaire': unCommentaire.id }) }}
+                            class="btn btn-danger" role="button" aria-disabled="true"><h3>supprimer un commentaire</h3></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+       {#} <center>
+            <div id="bordure"> 
+                <center>
+                    <h3>Commentaire pour le logement: {{ unCommentaire.leCommentaireDuLogement.nomLogement }} </h3>
+                    <table>    
+                        </h4><tr> <td><h4>note: {{ unCommentaire.notationCommentaire }}/5</h4></td>  </tr>
+                        <tr> <td><h4>titre: {{ unCommentaire.titreCommentaire }}</h4></td> </tr>
+                        {% if unCommentaire.descriptionCommentaire != null %}
+                            <tr> <td><h4>description: {{ unCommentaire.descriptionCommentaire }}</h4></td> </tr>
+                        {% endif %}
+                    </table>
+                     <br>
+                     <a  href={{ path('modifCommentaire', {'idCommentaire': unCommentaire.id }) }}
+                        class="btn btn-light" role="button" aria-disabled="true"> modifier un commentaire</a>
+                
+                     <a  href={{ path('suppCommentaire', {'idCommentaire': unCommentaire.id }) }}
+                        class="btn btn-danger" role="button" aria-disabled="true"> supprimer un commentaire</a>
+                </center> 
+            </div>
+        </center>
+        <br>
+        <br> 
+     {% endfor %}#}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <style>
+      #bordure  {
+      padding: 10px;
+      border: 5px solid white;
+      width: 40em;
+      text-align: center;
+  
+      }
+    </style>
+</body>
+</html>
+{% endblock %}
+  {% include 'fragment/_footer.html.twig' %}

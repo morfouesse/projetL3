@@ -1,0 +1,109 @@
+{% include "fragment/_navbar.html.twig" %}
+
+  
+
+{% block content %}
+<!doctype html>
+<html>
+<body>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1 class="text-center display-2 text-dark text-uppercase" >Rechercher votre réservation de logement</h1>
+        <br>
+       
+        <br>
+        <br>
+        <center><a class="btn btn-dark" href="#bas"><h2>Ce que nous vous proposons</h2></a></center>
+        <br>
+        <br>
+         {% if app.user %}
+        <center><a class="btn btn-dark" href="/listeLogement"><h2>Trouver votre réservation en journée !</h2></a></center>
+        {% endif %}
+        {% if not app.user %}
+            <br>
+            <br>
+            <br>
+            <div class= "jumbotron" style="background-color: #1e2125;">
+                <h2 class="text-center text-light " >Commencer par vous inscrire ou vous connectez</h2>
+                <br>
+                <center>
+                    <a class=" btn ml-2 text-white" style="background-color: #1e2125;" href="/inscription"><h2>Inscription</h2></a>
+                    <a class=" btn ml-8 text-white" style="background-color: #1e2125;" href="/connexion"><h2>Connexion</h2></a>
+                </center>
+            </div>
+        <br>
+        <br>
+        <br>
+        {% endif %}
+       
+        <br>
+        <br>
+        <br>
+           <br>
+              <br>
+                  <center> 
+                  <h2 class="text-center text-dark text-uppercase">Les logements les plus réservés par nos utilisateurs</h2>
+                   </center>
+                  <br>
+                  <br>
+                    <div class="py-5">
+                      <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-light">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th><h2>Nom des logements</h2></th>
+                                            <th><h2>Type de logement</h2></th>
+                                            <th><h2>Ville</h2></th>
+                                            <th><h2>Nombre de réservation</h2></th>
+                                        </tr>
+                                     <tbody>
+                                    
+            
+                                            {% for uneOffre in lesLogementsLesPlusReserver %}  
+                                        <tr>
+                                            <td class="td-light"><h3>{{ uneOffre.nomLogement }} </h3></td>
+                                            <td class="td-light"><h3>{{ uneOffre.nomTypeLogement }}</h3></td>
+                                            <td class="td-light"><h3>{{ uneOffre.nomVille }} </h3></td>  
+                                            <td class="td-light"><center><h3> {{ uneOffre.1 }}</h3> </center></td>    
+                                        </tr>
+                                            {% endfor %}   
+                                     </tbody>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                  <br>
+                  <br>
+                   <center> 
+                      <h2>logerAuSoleil et la sérénité est retrouvé</h2>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <h3>Grâce à notre service vous pourrez être logé en journée dans n'importe quel ville à l'heure que vous souhaitez.
+                  <br>
+                  Nous vous proposons des logements en hôtel, en appartement et en maison.
+                  </h3>
+                </center>
+            <a id="bas"></a>
+          <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        </body>
+</html>
+{% endblock %}
+  {% include 'fragment/_footer.html.twig' %}
+

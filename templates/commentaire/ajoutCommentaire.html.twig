@@ -1,0 +1,47 @@
+{% include "fragment/_navbar.html.twig" %}
+
+  
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block content %}
+<!doctype html>
+<html>
+<body>
+    <br>
+    <br>
+    <br>
+        <h2 class="text-center display-3 text-dark text-uppercase">Ajouter votre commentaire </h2>
+    <br>
+    <br>
+    <br>
+     <div class="container">
+        <center>
+            <div class="row">
+                <div class="col-md-12" >    
+                    {{form_start(form)}}  {# ATTENTION PAS DESPACE ENTRE ACOLADE #}
+                    <div class="col-md-4"><h3 class="text-left">{{form_row(form.notationCommentaire, {'label':'note'})}}</h3></div>
+                    <div class="col-md-4"><h3 class="text-left">{{form_row(form.titreCommentaire, {'label':'Titre'})}}</h3></div>
+                    <div class="col-md-4"><h3 class="text-left">{{form_row(form.descriptionCommentaire, {'label':'Description'})}}</h3></div>
+                <br>
+                <button type="submit" class="btn btn-dark"><h4>envoyer le commentaire</h4></button> 
+                {{form_end(form)}}  
+                <br>     
+                <br>
+                <a href={{ path('mesReservations') }} class="btn btn-dark"><h4>retour à mes réservations</h4></a>  
+                </div> 
+
+              
+            </div>
+        </center>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+</html>
+{% endblock %}
+  {% include 'fragment/_footer.html.twig' %}

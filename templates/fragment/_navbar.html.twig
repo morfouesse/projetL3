@@ -1,0 +1,64 @@
+ <!doctype html>
+<html>
+{% block stylesheets %}
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+{% endblock %}
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #1e2125;">
+  <div class = "container">
+    <a class="navbar-brand text-white" href="/accueil"><h2>logerAuSoleil</h2></a> <button class="navbar-toggler navbar-toggler-left"
+      type="button" data-toggle="collapse" data-target="#navbar2SupportedContent"></button>
+      </div>
+    <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+      {% if not app.user %}
+      <ul class="navbar-nav">
+        <a class="navbar-brand btn navbar-btn ml-2 text-white" style="background-color: #1e2125;" href="/inscription"><h4>Inscription</h4></a> </li>
+
+        <a class="navbar-brand btn  navbar-btn ml-2 text-white" style="background-color: #1e2125;" href="/connexion"><h4>Connexion</h4></a>
+      </ul>
+      {% else %}
+      <ul class="navbar-nav">
+     
+      
+        <li class="nav-item"> <a class="navbar-brand btn navbar-btn ml-2 text-white" href="/listeLogement"><h4>les offres des logements</h4></a> </li>
+        &nbsp; 
+        <li class="nav-item dropdown">
+          <a class="navbar-brand nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
+              <div class="dropdown-menu" style="background-color: #1e2125;">
+                <a class="dropdown-item text-white" style="background-color: #1e2125;" href="/mesReservations"><h5>Mes réservations</h5></a>
+                <a class="dropdown-item text-white" style="background-color: #1e2125;" href="/mesCommentaires"><h5>Mes commentaires</h5></a> 
+                <a class="dropdown-item text-white" style="background-color: #1e2125;" href="#"><h5>Mes infos</h5></a>
+                <a class="dropdown-item text-white" style="background-color: #1e2125;" href="/deconnexion"><h5>Se déconnecter</h5></a>            
+          </div>
+         <li class="nav-item"> <a class="navbar-brand btn navbar-btn ml-2 text-white" href="/accueil"><h4>accueil</h4></a> </li>
+        </li>
+      </ul>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" style=""></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" style=""></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous" style=""></script>
+      {% endif %}
+    </div>
+
+</nav>
+<style>
+    body {
+        background-color: #FFFFFF;
+        color: black;
+    }
+</style>
+</htlm>
+{% endblock %}
+{% block content %}
+{# pour chaque vue sinon pas de layout #}
+{% endblock %}
+
+
+
+

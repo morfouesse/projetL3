@@ -1,0 +1,59 @@
+{% include 'fragment/_navbar.html.twig' %}
+
+
+
+{% block content %}
+<body>
+<br>
+<br>
+<br>
+<br>
+<h1 class="text-center display-2 text-dark text-uppercase">Connectez-vous</h1>
+<br>
+<br>
+<br>
+<br>
+
+{% if error %}
+  <div class ="alert alert-danger">
+    {{ error.messageKey | trans(error.messagedata, 'security') }}
+  </div>
+{% endif %}
+
+<form action="/connexion" method="post"> 
+  <div class="container">
+        <center>
+          <div class="row">
+            <div class="col-md-12" >
+  
+              <div class="form-group col-md-4 text-left">
+                      <label><h3>Nom d'utilisateur</h3></label>
+                       <input require name="_username"
+                       type="text" class="form-control" value = "{{ lastUsername }}">
+              </div>
+              <div class="form-group col-md-4 text-left">
+                         <label><h3>mot de passe</h3></label>
+                         <input require name="_password"  
+                         type="password" class="form-control"> 
+              </div>
+              <br>
+                 <div class="form-group">
+                     <button type="submit"  class="btn btn-dark"><h4>Connexion</h4></button>
+                 </div>
+              </div>
+          </div>
+        </center>
+  </div>
+  </form>          
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+{% endblock %}
+{% include 'fragment/_footer.html.twig' %}
+

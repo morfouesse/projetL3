@@ -1,0 +1,164 @@
+{% include "fragment/_navbar.html.twig" %}
+
+  
+
+{% block content %}
+<!doctype html>
+<html>
+<body>
+    <br>
+    <br>
+    <br>
+    <center>
+         <h1 class="text-center display-4 text-dark text-uppercase">Vos Réservations</h1>
+    </center>
+    <br>
+    <br>
+    <br>
+      {% if not lesOffresReserverDuUser %} {# si il y a pas(vide) de tableaux lesOffresReserverDuUser #}
+       <br>
+        <br>
+        <br>
+      <center>
+        <h2>Vous n'avez pas de réservation</h2>
+     </center>
+      <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% else %}
+           <center>
+                <h1 class="text-center display-4 text-dark text-uppercase">Rechercher votre logement en journée</h1>
+                </center>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="container">
+                    <div class="row flex">
+                        {% for uneReservation in lesOffreADate %}  
+                            {% if uneReservation %}
+                                <div class="col-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="card-title">{{ uneReservation.uneReservationDunLogement.nomLogement }}</h3>
+                                        </div>
+                                        <div class="card-text">
+                                            <div class= "container">
+                                                <h5>{{ uneReservation.uneReservationDunLogement.nomTypeLogement }}</h5>
+                                                <h5>{{ uneReservation.uneReservationDunLogement.laVilleDunLogement.nomVille }}</h5>
+                                                <h5>{{ uneReservation.uneReservationDunLogement.descriptionLogement }}</h5>
+                                                <h5>{{ uneReservation.uneReservationDunLogement.prixLogement }} €</h5>
+                                                <h5>{{ uneReservation.dateOffre }}</h5>
+                                                <h5>{{ uneReservation.heureOffreDebut }}-{{ uneReservation.heureOffreFin }}</h5>
+                                            </div>
+                                            {% if uneReservation.dateActif == 1  %} {# si la date de reservation est superieur a la date actuelle #}
+                                                <a  href={{ path('annulerReservation', {'idOffre': uneReservation.id }) }}
+                                                class="btn btn-danger" role="button" aria-disabled="true"><h4>annuler cette réservation</h4></a></td>
+                                                <a href="#" class="btn btn-light disabled" role="button" aria-disabled="true"><h4>impossible de commenter</h4></a> 
+                                                 <br>
+                                                   <div class= "container"><br><h6>vous pourrez commenter le lendemain du jour de réservation ou plus tard pour un seul logement</h6></div>        
+                                            {% else %}
+                                                <a href="#" class="btn btn-danger disabled" role="button" aria-disabled="true"><h4>annuler cette réservation</h4></a>
+                                                {% if uneReservation.unCommentaireDuneOffre.actif == 1 and uneReservation.unCommentaireDuneOffre.titreCommentaire== null %}
+                                                {# si y a un commantaire vide pour cette offre #}
+                                                    <a  href={{ path('addCommentaire', {'idLogement': uneReservation.uneReservationDunLogement.id }) }}
+                                                        class="btn btn-dark" role="button" aria-disabled="true"><h4>commenter cette réservation</h4></a>
+                                            
+                                               
+                                                {% elseif uneReservation.unCommentaireDuneOffre.titreCommentaire %}
+                                                        <a href="#" class="btn btn-light disabled" role="button" aria-disabled="true"><h4> logement déjà commenté</h4></a>
+                                               
+                                                {% endif %}
+                                            {% endif %}          
+                                        </div>
+                                    </div>
+                                </div>                    
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+    {#  <div class="py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-18">
+                    <br>
+                     <h3>Vous pouvez annulez une réservation si cette date est plus grande que la date actuelle</h3>
+                     <br>
+                        <table class="table table-striped table-dark">
+                            <thead>
+                                <tr>
+                                    <th>Nom des logements</th>
+                                    <th>type logement</th>
+                                    <th>description</th>   
+                                    <th>ville</th>
+                                    <th>date</th>
+                                    <th>horraire de reservation</th>
+                                    <th>prix &nbsp;</th>
+                                    <th> annuler une réservation</th>
+                                    <th>écrire un commentaire&nbsp;&nbsp</th>
+                                </tr>
+                                <tbody>
+                                    {% for uneReservation in lesOffreADate %}  
+                                    {% if uneReservation %}
+                                    
+                                        <td>{{ uneReservation.uneReservationDunLogement.nomLogement }}</td>
+                                        <td>{{ uneReservation.uneReservationDunLogement.nomTypeLogement }}</td>
+                                        <td>{{ uneReservation.uneReservationDunLogement.descriptionLogement }}</td>
+                                        <td>{{ uneReservation.uneReservationDunLogement.laVilleDunLogement.nomVille }}</td>
+                                        <td>{{ uneReservation.dateOffre }}</td>
+                                        <td>{{ uneReservation.heureOffreDebut }}-{{ uneReservation.heureOffreFin }}</td>
+                                        <td>{{ uneReservation.uneReservationDunLogement.prixLogement }} €</td>
+                                      {% if uneReservation.dateActif == 1  %} {# si la date de reservation est superieur a la date actuelle 
+                                           <td><a  href={{ path('annulerReservation', {'idOffre': uneReservation.id }) }}
+                                                class="btn btn-danger" role="button" aria-disabled="true">annuler</a></td>
+                                                <td><a href="#" class="btn btn-light disabled" role="button" aria-disabled="true">impossible de commenter</a></td>  
+                                                <td> <small>vous pourrez commenter le lendemain du jour de réservation ou plus tard pour un seul logement</small></td>          
+                                            {% else %}
+                                                <td><a href="#" class="btn btn-danger disabled" role="button" aria-disabled="true">annuler</a></td>
+                                                {% if uneReservation.unCommentaireDuneOffre.actif == 1 and uneReservation.unCommentaireDuneOffre.titreCommentaire== null %}
+                                                {# si y a un commantaire vide pour cette offre 
+                                                <td><a  href={{ path('addCommentaire', {'idLogement': uneReservation.uneReservationDunLogement.id }) }}
+                                                        class="btn btn-light" role="button" aria-disabled="true">commenter</a></td> 
+                                            
+                                               
+                                                {% elseif uneReservation.unCommentaireDuneOffre.titreCommentaire %}
+                                                        <td><a href="#" class="btn btn-light disabled" role="button" aria-disabled="true">déjà commenté</a></td>   
+                                                {% endif %}
+                                               
+                                               
+                                               
+                                            
+                                          
+                              
+
+                                      {% endif %}
+                                          
+                                   
+                                    {% endif %}
+                                    {% endfor %}
+                                </thead>
+                            </tbody>
+                        </table>
+                        <a href={{ path('accueil') }} class="btn btn-light">retour à l'accueil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    #}
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+</html>
+{% endblock %}
+  {% include 'fragment/_footer.html.twig' %}
